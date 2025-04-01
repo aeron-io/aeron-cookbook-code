@@ -1,7 +1,7 @@
 [versions]
 junitVersion = "5.11.4"
 junitPlatformVersion = "1.11.4"
-checkstyleVersion = "10.21.1"
+checkstyleVersion = "10.22.0"
 aeronVersion = "1.47.0"
 sbeVersion = "1.34.1"
 agronaVersion = "2.0.1"
