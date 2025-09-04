@@ -41,8 +41,10 @@ public class ClusterApp
 
     /**
      * The main method.
+     *
      * @param args command line args
      */
+    @SuppressWarnings("try")
     public static void main(final String[] args)
     {
         final ShutdownSignalBarrier barrier = new ShutdownSignalBarrier();
@@ -65,9 +67,9 @@ public class ClusterApp
             ClusteredMediaDriver ignored = ClusteredMediaDriver.launch(
                 clusterConfig.mediaDriverContext(),
                 clusterConfig.archiveContext(),
-                clusterConfig.consensusModuleContext());
+                clusterConfig.consensusModuleContext().shutdownSignalBarrier(barrier));
             ClusteredServiceContainer ignored1 = ClusteredServiceContainer.launch(
-                clusterConfig.clusteredServiceContext()))
+                clusterConfig.clusteredServiceContext().shutdownSignalBarrier(barrier)))
         {
             LOGGER.info("Started Cluster Node...");
             barrier.await();
@@ -78,6 +80,7 @@ public class ClusterApp
     /**
      * Read the cluster addresses from the environment variable CLUSTER_ADDRESSES or the
      * system property cluster.addresses
+     *
      * @return cluster addresses
      */
     private static String getClusterAddresses()
@@ -92,6 +95,7 @@ public class ClusterApp
 
     /**
      * Get the cluster node id
+     *
      * @return cluster node id, default 0
      */
     private static int getClusterNode()
@@ -106,6 +110,7 @@ public class ClusterApp
 
     /**
      * Get the base port for the cluster configuration
+     *
      * @return base port, default 9000
      */
     private static int getBasePort()
@@ -120,8 +125,9 @@ public class ClusterApp
 
     /**
      * Await DNS resolution of self. Under Kubernetes, this can take a while.
+     *
      * @param hostArray host array
-     * @param nodeId node id
+     * @param nodeId    node id
      */
     private static void awaitDnsResolution(final List<String> hostArray, final int nodeId)
     {
@@ -176,6 +182,7 @@ public class ClusterApp
 
     /**
      * Apply DNS delay
+     *
      * @return true if DNS delay should be applied
      */
     private static boolean applyDnsDelay()

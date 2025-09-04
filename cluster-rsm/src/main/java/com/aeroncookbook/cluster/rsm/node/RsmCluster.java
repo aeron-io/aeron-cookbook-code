@@ -26,6 +26,7 @@ import java.util.List;
 
 public class RsmCluster
 {
+    @SuppressWarnings("try")
     public static void main(final String[] args)
     {
         final ShutdownSignalBarrier barrier = new ShutdownSignalBarrier();

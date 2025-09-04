@@ -182,11 +182,11 @@ public class ArchiveHostAgent implements Agent
 
         LOGGER.info("waiting for recording to start for session {}", publication.sessionId());
         final var counters = aeron.countersReader();
-        int counterId = RecordingPos.findCounterIdBySession(counters, publication.sessionId());
+        int counterId = RecordingPos.findCounterIdBySession(counters, publication.sessionId(), archive.archiveId());
         while (CountersReader.NULL_COUNTER_ID == counterId)
         {
             idleStrategy.idle();
-            counterId = RecordingPos.findCounterIdBySession(counters, publication.sessionId());
+            counterId = RecordingPos.findCounterIdBySession(counters, publication.sessionId(), archive.archiveId());
         }
         final long recordingId = RecordingPos.getRecordingId(counters, counterId);
 

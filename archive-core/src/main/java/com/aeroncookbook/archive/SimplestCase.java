@@ -59,6 +59,7 @@ public class SimplestCase
     private Aeron aeron;
     private ArchivingMediaDriver mediaDriver;
 
+    @SuppressWarnings("try")
     public static void main(final String[] args)
     {
         final SimplestCase simplestCase = new SimplestCase();
@@ -134,11 +135,13 @@ public class SimplestCase
 
             final long stopPosition = publication.position();
             final CountersReader countersReader = aeron.countersReader();
-            int counterId = RecordingPos.findCounterIdBySession(countersReader, publication.sessionId());
+            int counterId = RecordingPos.findCounterIdBySession(
+                countersReader, publication.sessionId(), aeronArchive.archiveId());
             while (CountersReader.NULL_COUNTER_ID == counterId)
             {
                 idleStrategy.idle();
-                counterId = RecordingPos.findCounterIdBySession(countersReader, publication.sessionId());
+                counterId = RecordingPos.findCounterIdBySession(
+                    countersReader, publication.sessionId(), aeronArchive.archiveId());
             }
 
             while (countersReader.getCounterValue(counterId) < stopPosition)

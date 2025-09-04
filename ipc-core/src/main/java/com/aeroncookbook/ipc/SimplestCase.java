@@ -33,6 +33,7 @@ public class SimplestCase
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(SimplestCase.class);
 
+    @SuppressWarnings("try")
     public static void main(final String[] args)
     {
         final String channel = "aeron:ipc";
