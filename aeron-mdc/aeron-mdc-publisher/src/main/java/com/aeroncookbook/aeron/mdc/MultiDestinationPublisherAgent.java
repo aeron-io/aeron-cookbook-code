@@ -32,6 +32,7 @@ public class MultiDestinationPublisherAgent implements Agent
     private long nextAppend = Long.MIN_VALUE;
     private long lastSeq = 0;
 
+    @SuppressWarnings("this-escape")
     public MultiDestinationPublisherAgent(final String host, final int controlChannelPort)
     {
         this.mediaDriver = launchMediaDriver();
