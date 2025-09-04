@@ -38,6 +38,16 @@ allprojects {
     }
 }
 
+subprojects {
+
+    tasks.withType<JavaCompile> {
+        options.encoding = "UTF-8"
+        options.compilerArgs.add("--release")
+        options.compilerArgs.add(java.sourceCompatibility.majorVersion)
+        options.compilerArgs.addAll(listOf("-Xlint:all,-processing", "-Werror")) // Enable all warnings and treat them as errors
+    }
+}
+
 fun isNonStable(version: String): Boolean {
     val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase().contains(it) }
     val regex = "^[0-9,.v-]+(-r)?$".toRegex()
