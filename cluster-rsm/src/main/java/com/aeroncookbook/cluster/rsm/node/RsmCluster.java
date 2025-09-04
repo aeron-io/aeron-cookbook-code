@@ -44,9 +44,9 @@ public class RsmCluster
             ClusteredMediaDriver clusteredMediaDriver = ClusteredMediaDriver.launch(
                 clusterConfig.mediaDriverContext(),
                 clusterConfig.archiveContext(),
-                clusterConfig.consensusModuleContext());
+                clusterConfig.consensusModuleContext().shutdownSignalBarrier(barrier));
             ClusteredServiceContainer container = ClusteredServiceContainer.launch(
-                clusterConfig.clusteredServiceContext()))
+                clusterConfig.clusteredServiceContext().shutdownSignalBarrier(barrier)))
         {
             System.out.println("Started Cluster Node...");
             System.out.println("Cluster directory is " + clusterConfig.consensusModuleContext().clusterDir());
