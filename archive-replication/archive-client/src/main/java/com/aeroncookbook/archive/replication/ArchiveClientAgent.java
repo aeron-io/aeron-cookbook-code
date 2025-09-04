@@ -275,7 +275,7 @@ public class ArchiveClientAgent implements Agent
         LOGGER.info("starting");
     }
 
-    public String localHost(final String fallback)
+    public static String localHost(final String fallback)
     {
         try
         {

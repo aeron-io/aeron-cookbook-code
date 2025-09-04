@@ -268,7 +268,7 @@ public class ArchiveReplicatorAgent implements Agent
         CloseHelper.quietClose(archivingMediaDriver);
     }
 
-    public String localHost(final String fallback)
+    public static String localHost(final String fallback)
     {
         try
         {
