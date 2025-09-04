@@ -1,6 +1,5 @@
 package com.aeroncookbook.aeron.mdc;
 
-import org.agrona.CloseHelper;
 import org.agrona.concurrent.AgentRunner;
 import org.agrona.concurrent.ShutdownSignalBarrier;
 import org.agrona.concurrent.SleepingMillisIdleStrategy;
@@ -24,17 +23,16 @@ public class MultiDestinationSubscriber
         else
         {
             final var controlChannelPort = Integer.parseInt(controlPort);
-            final var barrier = new ShutdownSignalBarrier();
             final MultiDestinationSubscriberAgent hostAgent =
                 new MultiDestinationSubscriberAgent(mdcHost, thisHost, controlChannelPort);
-            final var runner =
-                new AgentRunner(new SleepingMillisIdleStrategy(), MultiDestinationSubscriber::errorHandler,
-                null, hostAgent);
-            AgentRunner.startOnThread(runner);
+            final SleepingMillisIdleStrategy idleStrategy = new SleepingMillisIdleStrategy();
+            try (var barrier = new ShutdownSignalBarrier();
+                var runner = new AgentRunner(idleStrategy, MultiDestinationSubscriber::errorHandler, null, hostAgent))
+            {
+                AgentRunner.startOnThread(runner);
 
-            barrier.await();
-
-            CloseHelper.quietClose(runner);
+                barrier.await();
+            }
         }
     }
 

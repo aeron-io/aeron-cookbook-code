@@ -16,6 +16,7 @@
 
 package com.aeroncookbook.agrona.ringbuffer;
 
+import org.agrona.CloseHelper;
 import org.agrona.concurrent.AgentRunner;
 import org.agrona.concurrent.BusySpinIdleStrategy;
 import org.agrona.concurrent.IdleStrategy;
@@ -65,8 +66,6 @@ public class StartHere
         barrier.await();
 
         //close the resources
-        receiveAgentRunner.close();
-        sendAgentRunner1.close();
-        sendAgentRunner2.close();
+        CloseHelper.closeAll(receiveAgentRunner, sendAgentRunner1, sendAgentRunner2, barrier);
     }
 }

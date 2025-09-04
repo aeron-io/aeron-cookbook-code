@@ -21,6 +21,7 @@ import io.aeron.Publication;
 import io.aeron.Subscription;
 import io.aeron.driver.MediaDriver;
 import io.aeron.driver.ThreadingMode;
+import org.agrona.CloseHelper;
 import org.agrona.concurrent.AgentRunner;
 import org.agrona.concurrent.BusySpinIdleStrategy;
 import org.agrona.concurrent.IdleStrategy;
@@ -78,9 +79,6 @@ public class StartHere
         barrier.await();
 
         //close the resources
-        receiveAgentRunner.close();
-        sendAgentRunner.close();
-        aeron.close();
-        mediaDriver.close();
+        CloseHelper.closeAll(receiveAgentRunner, sendAgentRunner, aeron, mediaDriver, barrier);
     }
 }

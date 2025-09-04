@@ -60,5 +60,6 @@ public class Client
         CloseHelper.quietClose(clientAgentRunner);
         CloseHelper.quietClose(aeron);
         CloseHelper.quietClose(mediaDriver);
+        CloseHelper.quietClose(barrier);
     }
 }

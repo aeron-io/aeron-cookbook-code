@@ -29,8 +29,6 @@ public class RsmCluster
     @SuppressWarnings("try")
     public static void main(final String[] args)
     {
-        final ShutdownSignalBarrier barrier = new ShutdownSignalBarrier();
-
         final ClusterConfig clusterConfig = ClusterConfig.create(
             0, List.of("localhost"), List.of("localhost"), 9000, new RsmClusteredService());
 
@@ -42,10 +40,11 @@ public class RsmCluster
         clusterConfig.consensusModuleContext().ingressChannel("aeron:udp?endpoint=localhost:9010|term-length=64k");
         clusterConfig.consensusModuleContext().deleteDirOnStart(false); //true to always start fresh
 
-        try (ClusteredMediaDriver clusteredMediaDriver = ClusteredMediaDriver.launch(
-            clusterConfig.mediaDriverContext(),
-            clusterConfig.archiveContext(),
-            clusterConfig.consensusModuleContext());
+        try (ShutdownSignalBarrier barrier = new ShutdownSignalBarrier();
+            ClusteredMediaDriver clusteredMediaDriver = ClusteredMediaDriver.launch(
+                clusterConfig.mediaDriverContext(),
+                clusterConfig.archiveContext(),
+                clusterConfig.consensusModuleContext());
             ClusteredServiceContainer container = ClusteredServiceContainer.launch(
                 clusterConfig.clusteredServiceContext()))
         {

@@ -1,7 +1,7 @@
 package com.aeroncookbook.archive.replication;
 
-import org.agrona.CloseHelper;
 import org.agrona.concurrent.AgentRunner;
+import org.agrona.concurrent.IdleStrategy;
 import org.agrona.concurrent.ShutdownSignalBarrier;
 import org.agrona.concurrent.SleepingMillisIdleStrategy;
 import org.slf4j.Logger;
@@ -25,16 +25,15 @@ public class ArchiveHost
         {
             final var controlChannelPort = Integer.parseInt(controlPort);
             final var recEventsChannelPort = Integer.parseInt(eventsPort);
-            final var barrier = new ShutdownSignalBarrier();
             final var hostAgent = new ArchiveHostAgent(archiveHost, controlChannelPort, recEventsChannelPort);
-            final var runner =
-                new AgentRunner(new SleepingMillisIdleStrategy(), ArchiveHost::errorHandler, null, hostAgent);
+            final IdleStrategy idleStrategy = new SleepingMillisIdleStrategy();
+            try (var barrier = new ShutdownSignalBarrier();
+                var runner = new AgentRunner(idleStrategy, ArchiveHost::errorHandler, null, hostAgent))
+            {
+                AgentRunner.startOnThread(runner);
 
-            AgentRunner.startOnThread(runner);
-
-            barrier.await();
-
-            CloseHelper.quietClose(runner);
+                barrier.await();
+            }
         }
     }
 

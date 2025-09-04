@@ -16,6 +16,7 @@
 
 package com.aeroncookbook.agrona.agents;
 
+import org.agrona.CloseHelper;
 import org.agrona.concurrent.AgentRunner;
 import org.agrona.concurrent.BusySpinIdleStrategy;
 import org.agrona.concurrent.IdleStrategy;
@@ -60,7 +61,6 @@ public class StartHere
         barrier.await();
 
         //close the resources
-        receiveAgentRunner.close();
-        sendAgentRunner.close();
+        CloseHelper.closeAll(receiveAgentRunner, sendAgentRunner, barrier);
     }
 }

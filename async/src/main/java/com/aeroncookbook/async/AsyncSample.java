@@ -20,6 +20,7 @@ import io.aeron.Aeron;
 import io.aeron.Publication;
 import io.aeron.Subscription;
 import io.aeron.driver.MediaDriver;
+import org.agrona.CloseHelper;
 import org.agrona.concurrent.AgentRunner;
 import org.agrona.concurrent.IdleStrategy;
 import org.agrona.concurrent.ShutdownSignalBarrier;
@@ -72,9 +73,6 @@ public class AsyncSample
         barrier.await();
 
         //close the resources
-        timerAgentRunner.close();
-        timerClientAgentRunner.close();
-        aeron.close();
-        mediaDriver.close();
+        CloseHelper.closeAll(timerAgentRunner, timerClientAgentRunner, aeron, mediaDriver, barrier);
     }
 }
