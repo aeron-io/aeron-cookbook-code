@@ -1,6 +1,6 @@
 [versions]
-junitVersion = "5.13.2"
-junitPlatformVersion = "1.13.2"
+junitVersion = "5.13.4"
+junitPlatformVersion = "1.13.4"
 checkstyleVersion = "11.0.1"
 aeronVersion = "1.48.6"
 sbeVersion = "1.35.6"
