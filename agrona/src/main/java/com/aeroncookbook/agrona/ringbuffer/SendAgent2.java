@@ -36,7 +36,7 @@ public class SendAgent2 implements Agent
     @Override
     public int doWork()
     {
-        if (currentCountItem > sendCount)
+        if (currentCountItem < sendCount)
         {
             return 0;
         }
