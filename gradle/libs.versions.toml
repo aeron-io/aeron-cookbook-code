@@ -2,7 +2,7 @@
 junitVersion = "6.0.0"
 checkstyleVersion = "11.1.1"
 aeronVersion = "1.48.6"
-sbeVersion = "1.35.6"
+sbeVersion = "1.36.0"
 agronaVersion = "2.3.0-rc1"
 slf4jVersion = "2.0.17"
 logbackVersion = "1.5.18"
