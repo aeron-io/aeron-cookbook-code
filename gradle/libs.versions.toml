@@ -1,6 +1,5 @@
 [versions]
-junitVersion = "5.13.4"
-junitPlatformVersion = "1.13.4"
+junitVersion = "6.0.0"
 checkstyleVersion = "11.0.1"
 aeronVersion = "1.48.6"
 sbeVersion = "1.35.6"
@@ -21,7 +20,7 @@ agrona = { group = "org.agrona", name = "agrona", version.ref = "agronaVersion" 
 sbe = { group = "uk.co.real-logic", name = "sbe-tool", version.ref = "sbeVersion" }
 jupiterEngine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junitVersion" }
 jupiterApi = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitVersion" }
-jupiterPlatform = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junitPlatformVersion" }
+jupiterPlatform = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junitVersion" }
 checkstyle = { group = "com.puppycrawl.tools", name = "checkstyle", version.ref = "checkstyleVersion" }
 slf4j = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4jVersion" }
 logback = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logbackVersion" }
