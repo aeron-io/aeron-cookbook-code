@@ -11,7 +11,7 @@ jmhVersion = "1.37"
 picocliVersion = "4.7.7"
 jlineVersion = "3.30.5"
 picoJlineVersion = "4.7.7"
-versionsVersion = "0.52.0"
+versionsVersion = "0.53.0"
 
 [libraries]
 aeron-archive = { group = "io.aeron", name = "aeron-archive", version.ref = "aeronVersion" }
