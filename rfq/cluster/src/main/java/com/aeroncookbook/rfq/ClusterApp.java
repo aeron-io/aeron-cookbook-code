@@ -65,11 +65,11 @@ public class ClusterApp
         try (
             ShutdownSignalBarrier barrier = new ShutdownSignalBarrier();
             ClusteredMediaDriver ignored = ClusteredMediaDriver.launch(
-                clusterConfig.mediaDriverContext(),
+                clusterConfig.mediaDriverContext().terminationHook(barrier::signalAll),
                 clusterConfig.archiveContext(),
-                clusterConfig.consensusModuleContext().shutdownSignalBarrier(barrier));
+                clusterConfig.consensusModuleContext().terminationHook(barrier::signalAll));
             ClusteredServiceContainer ignored1 = ClusteredServiceContainer.launch(
-                clusterConfig.clusteredServiceContext().shutdownSignalBarrier(barrier)))
+                clusterConfig.clusteredServiceContext().terminationHook(barrier::signalAll)))
         {
             LOGGER.info("Started Cluster Node...");
             barrier.await();

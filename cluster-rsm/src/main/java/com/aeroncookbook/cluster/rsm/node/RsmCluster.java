@@ -42,11 +42,11 @@ public class RsmCluster
 
         try (ShutdownSignalBarrier barrier = new ShutdownSignalBarrier();
             ClusteredMediaDriver clusteredMediaDriver = ClusteredMediaDriver.launch(
-                clusterConfig.mediaDriverContext(),
+                clusterConfig.mediaDriverContext().terminationHook(barrier::signalAll),
                 clusterConfig.archiveContext(),
-                clusterConfig.consensusModuleContext().shutdownSignalBarrier(barrier));
+                clusterConfig.consensusModuleContext().terminationHook(barrier::signalAll));
             ClusteredServiceContainer container = ClusteredServiceContainer.launch(
-                clusterConfig.clusteredServiceContext().shutdownSignalBarrier(barrier)))
+                clusterConfig.clusteredServiceContext().terminationHook(barrier::signalAll)))
         {
             System.out.println("Started Cluster Node...");
             System.out.println("Cluster directory is " + clusterConfig.consensusModuleContext().clusterDir());
