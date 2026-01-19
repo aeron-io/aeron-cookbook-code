@@ -1,5 +1,5 @@
 [versions]
-junitVersion = "6.0.0"
+junitVersion = "6.0.2"
 checkstyleVersion = "11.1.0"
 aeronVersion = "1.49.0"
 sbeVersion = "1.36.0"
