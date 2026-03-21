@@ -9,7 +9,7 @@ logbackVersion = "1.5.32"
 mockitoVersion = "5.23.0"
 jmhVersion = "1.37"
 picocliVersion = "4.7.7"
-jlineVersion = "4.0.7"
+jlineVersion = "3.30.6"
 picoJlineVersion = "4.7.7"
 versionsVersion = "0.53.0"
 
