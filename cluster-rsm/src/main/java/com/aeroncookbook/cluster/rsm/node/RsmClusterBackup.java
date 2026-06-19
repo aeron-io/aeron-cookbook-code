@@ -1,19 +1,15 @@
 package com.aeroncookbook.cluster.rsm.node;
 
-import io.aeron.archive.ArchivingMediaDriver;
 import io.aeron.archive.client.AeronArchive;
 import io.aeron.cluster.ClusterBackup;
 import io.aeron.cluster.ClusterBackupEventsListener;
 import io.aeron.cluster.ClusterBackupMediaDriver;
 import io.aeron.cluster.ClusterMember;
-import io.aeron.cluster.ClusteredMediaDriver;
 import io.aeron.cluster.RecordingLog;
-import io.aeron.cluster.service.ClusteredServiceContainer;
 import io.aeron.samples.cluster.ClusterConfig;
 import org.agrona.ErrorHandler;
 import org.agrona.concurrent.ShutdownSignalBarrier;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -89,7 +85,7 @@ public class RsmClusterBackup
         };
     }
 
-    private static class PrintingClusterBackupEventsListener implements ClusterBackupEventsListener
+    private static final class PrintingClusterBackupEventsListener implements ClusterBackupEventsListener
     {
         public void onBackupQuery()
         {
