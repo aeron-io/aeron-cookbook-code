@@ -27,7 +27,9 @@ Step 4:
 
 ## Local Kubernetes
 
-These assume that you are running either on an Intel or Apple Silicon Mac with Docker Desktop and Kubernetes enabled or minikube installed, or on a Linux machine with minikube installed.
+> **Note**: These steps are for local development only. Aeron is supported in production on Linux.
+
+These assume that you are running either on a Linux machine with minikube installed, or on an Intel or Apple Silicon Mac with Docker Desktop and Kubernetes enabled or minikube installed.
 
 ### MiniKube
 
