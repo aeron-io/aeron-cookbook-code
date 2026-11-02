@@ -16,7 +16,7 @@ Projects:
 
 Requires:
 - Java 21
-- Gradle 8.5
+- Gradle 9.8.2
 - Docker (to run some samples)
 
  ![build](https://github.com/aeron-io/aeron-cookbook-code/workflows/JavaCI/badge.svg)
