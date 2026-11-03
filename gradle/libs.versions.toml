@@ -1,17 +1,17 @@
 [versions]
-junitVersion = "6.1.1"
-checkstyleVersion = "13.7.0"
-aeronVersion = "1.52.1"
-sbeVersion = "1.39.0"
-agronaVersion = "2.5.0"
-slf4jVersion = "2.0.18"
-logbackVersion = "1.5.38"
-mockitoVersion = "5.23.0"
+junitVersion = "6.1.3"
+checkstyleVersion = "14.3.0"
+aeronVersion = "1.54.0"
+sbeVersion = "1.41.0"
+agronaVersion = "2.7.0"
+slf4jVersion = "2.0.20"
+logbackVersion = "1.6.6"
+mockitoVersion = "5.24.0"
 jmhVersion = "1.37"
 picocliVersion = "4.7.7"
-jlineVersion = "3.30.6"
+jlineVersion = "3.30.17"
 picoJlineVersion = "4.7.7"
-versionsVersion = "0.54.0"
+versionsVersion = "0.66.0"
 
 [libraries]
 aeron-archive = { group = "io.aeron", name = "aeron-archive", version.ref = "aeronVersion" }
@@ -33,7 +33,7 @@ jline = { group = "org.jline", name = "jline", version.ref = "jlineVersion" }
 picoJline = { group = "info.picocli", name = "picocli-shell-jline3", version.ref = "picoJlineVersion" }
 
 [plugins]
-versions = { id = "com.github.ben-manes.versions", version.ref = "versionsVersion" }
+versions = { id = "io.github.ben-manes.versions", version.ref = "versionsVersion" }
 
 [bundles]
 testing = [ "jupiterApi", "jupiterEngine", "jupiterPlatform", "mockito-core", "mockito-junit"]
