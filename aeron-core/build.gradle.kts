@@ -26,7 +26,7 @@ sourceSets {
 
 tasks {
 
-    task("generateCodecs", JavaExec::class) {
+    register<JavaExec>("generateCodecs") {
         group = "sbe"
         val codecsFile = "src/main/resources/messages.xml"
         val sbeFile = "src/main/resources/sbe/sbe.xsd"
@@ -40,7 +40,6 @@ tasks {
         systemProperties["sbe.validation.xsd"] = sbeFile
         systemProperties["sbe.target.language"] = "Java"
         systemProperties["sbe.validation.stop.on.error"] = "true"
-        outputs.dir(generatedDir)
     }
 
     compileJava {
@@ -52,7 +51,7 @@ testing {
     suites {
         // Configure the built-in test suite
         @Suppress("UNUSED_VARIABLE")
-        val test by getting(JvmTestSuite::class) {
+        val test = getByName<JvmTestSuite>("test") {
             // Use JUnit Jupiter test framework
             useJUnitJupiter(libs.versions.junitVersion.get())
 

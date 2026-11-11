@@ -30,7 +30,7 @@ testing {
     suites {
         // Configure the built-in test suite
         @Suppress("UNUSED_VARIABLE")
-        val test by getting(JvmTestSuite::class) {
+        val test = getByName<JvmTestSuite>("test") {
             // Use JUnit Jupiter test framework
             useJUnitJupiter(libs.versions.junitVersion.get())
         }
@@ -40,7 +40,7 @@ testing {
 
 tasks {
 
-    task("generateCodecs", JavaExec::class) {
+    register("generateCodecs", JavaExec::class) {
         group = "sbe"
         val codecsFile = "src/main/resources/messages.xml"
         val sbeFile = "src/main/resources/sbe/sbe.xsd"
@@ -57,7 +57,7 @@ tasks {
         outputs.dir(generatedDir)
     }
 
-    task ("uberRsmCluster", Jar::class) {
+    register ("uberRsmCluster", Jar::class) {
         group = "uber"
         manifest {
             attributes["Main-Class"]="com.aeroncookbook.cluster.rsm.node.RsmCluster"
@@ -73,7 +73,7 @@ tasks {
     }
 
 
-    task ("uberRsmClient", Jar::class) {
+    register ("uberRsmClient", Jar::class) {
         group = "uber"
         manifest {
             attributes["Main-Class"]="com.aeroncookbook.cluster.rsm.client.ClusterClient"

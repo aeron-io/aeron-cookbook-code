@@ -35,7 +35,7 @@ sourceSets {
 }
 
 tasks {
-    task("generateCodecs", JavaExec::class) {
+    register("generateCodecs", JavaExec::class) {
         group = "sbe"
         val codecsFile = "src/main/resources/protocol/protocol-codecs.xml"
         val sbeFile = "src/main/resources/protocol/fpl/sbe.xsd"

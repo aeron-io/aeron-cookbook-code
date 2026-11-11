@@ -51,7 +51,7 @@ testing {
     suites {
         // Configure the built-in test suite
         @Suppress("UNUSED_VARIABLE")
-        val test by getting(JvmTestSuite::class) {
+        val test = getByName<JvmTestSuite>("test") {
             // Use JUnit Jupiter test framework
             useJUnitJupiter(libs.versions.junitVersion.get())
 
@@ -70,7 +70,7 @@ testing {
 
 tasks {
 
-    task ("uberJar", Jar::class) {
+    register("uberJar", Jar::class) {
         group = "uber"
         manifest {
             attributes["Main-Class"]="com.aeroncookbook.rfq.admin.Admin"
@@ -85,7 +85,7 @@ tasks {
         })
     }
 
-    task("generateCodecs", JavaExec::class) {
+    register("generateCodecs", JavaExec::class) {
         group = "sbe"
         val codecsFile = "src/main/resources/protocol/protocol-codecs.xml"
         val sbeFile = "src/main/resources/protocol/fpl/sbe.xsd"

@@ -17,7 +17,7 @@ dependencies {
 
 tasks {
 
-    task("uberJar", Jar::class) {
+    register("uberJar", Jar::class) {
         group = "uber"
         manifest {
             attributes["Main-Class"] = "com.aeroncookbook.archive.replication.ArchiveClient"
@@ -36,7 +36,7 @@ testing {
     suites {
         // Configure the built-in test suite
         @Suppress("UNUSED_VARIABLE")
-        val test by getting(JvmTestSuite::class) {
+        val test = getByName<JvmTestSuite>("test") {
             // Use JUnit Jupiter test framework
             useJUnitJupiter(libs.versions.junitVersion.get())
 

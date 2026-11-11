@@ -19,7 +19,7 @@ sourceSets {
 }
 
 tasks {
-    task("generateCodecs", JavaExec::class) {
+    register("generateCodecs", JavaExec::class) {
         group = "sbe"
         val codecsFile = "src/main/resources/messages.xml"
         val sbeFile = "src/main/resources/sbe/sbe.xsd"
@@ -36,7 +36,7 @@ tasks {
         outputs.dir(generatedDir)
     }
 
-    task("generateCodecsWithPrecedeceChecks", JavaExec::class) {
+    register("generateCodecsWithPrecedeceChecks", JavaExec::class) {
         group = "sbe"
         val codecsFile = "src/main/resources/precedence-checked-messages.xml"
         val sbeFile = "src/main/resources/sbe/sbe.xsd"
